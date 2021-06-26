@@ -1,0 +1,29 @@
+{
+  "name": "bezier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btea/bezier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/btea/bezier/issues"
+  },
+  "homepage": "https://github.com/btea/bezier#readme",
+  "dependencies": {
+    "vite": "^2.3.8"
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "less": "^4.1.1",
+    "typescript": "^4.3.4"
+  }
+}
