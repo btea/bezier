@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEZIER</title>
+</head>
+<body>
+    <div class="container">
+		<div class="coordinate-plane">
+			<button class="control1 control"></button>
+			<button class="control2 control"></button>
+			<span class="start point"></span>
+			<span class="end point"></span>
+		</div>
+		<section id="preview">
+			<code>
+				cubic-bezier(
+				<span class="values">
+				<span id="p1x" class="params"></span>,
+				<span id="p1y" class="params"></span>,
+				<span id="p2x" class="params"></span>,
+				<span id="p2y" class="params"></span>
+				</span>
+				)
+			</code>
+			<div class="operator">
+				<h2>预览 & 比较</h2>
+				<button class="start-play">开始</button>
+				<div class="time">
+					<span class="name">过渡时间</span>
+					<span class="bar">
+						<!-- <i class="time-point"></i> -->
+						<span class="bar-content">
+							
+						</span>
+					</span>
+					<span class="desc-time"></span>
+				</div>
+
+			</div>
+			<!-- current compare -->
+		</section>	
+		<section id="library"></section>
+	</div>
+    <script type="module" src="./src/index.js"></script>
+</body>
+</html>
