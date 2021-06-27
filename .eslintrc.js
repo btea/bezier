@@ -9,6 +9,7 @@ module.exports = {
         'plugin:vue/essential',
         'plugin:@typescript-eslint/recommended'
     ],
+    parser: 'vue-eslint-parser',
     parserOptions: {
         ecmaVersion: 12,
         parser: '@typescript-eslint/parser',
