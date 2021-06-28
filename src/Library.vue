@@ -43,9 +43,7 @@ export default defineComponent({
             [10, 90, 60, 10],
             [40, 90, 60, 10]
         ];
-        let names = ['ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out'],
-            red,
-            blue;
+        let names = ['ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out'];
         let activeFun = ref('ease');
         let activeNum = 0;
         let libEl = ref(null);
