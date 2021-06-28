@@ -6,11 +6,19 @@
             <span class="start point"></span>
             <span class="end point"></span>
         </div>
+        <Preview />
+        <Library />
     </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Preview from './Preview.vue';
+import Library from './Library.vue';
 export default defineComponent({
+    components: {
+        Preview,
+        Library
+    },
     setup() {}
 });
 </script>
