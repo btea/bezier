@@ -36,11 +36,11 @@ export default class CreateCanvas {
         this.ctx = CanvasRenderingContext2D.prototype;
         this.init();
     }
-    init() {
+    init(): void {
         this.createCanvas();
     }
-    createCanvas() {
-        let el = document.createElement('canvas');
+    createCanvas(): void {
+        const el = document.createElement('canvas');
         let str = `width: ${this.width}px; height: ${this.height}px;`;
         if (this.background !== 'none') {
             str += `background: ${this.background};`;
@@ -51,11 +51,11 @@ export default class CreateCanvas {
             width: this.width,
             height: this.height
         });
-        let ctx = el.getContext('2d') as CanvasRenderingContext2D;
+        const ctx = el.getContext('2d') as CanvasRenderingContext2D;
         this.el = el;
         this.ctx = ctx;
     }
-    renderLine(points: points) {
+    renderLine(points: points): void {
         /**
          * @params points Array
          * @params points[0] 起始点  points[1] 控制点1  points[2] 控制点2  points[3] 终点
@@ -82,7 +82,7 @@ export default class CreateCanvas {
             this.renderCircle(p);
         });
     }
-    renderAxis() {
+    renderAxis(): void {
         this.ctx.beginPath();
         this.ctx.strokeStyle = '#000';
         this.ctx.moveTo(0 + 0.5, 150 + 0.5);
@@ -90,7 +90,7 @@ export default class CreateCanvas {
         this.ctx.lineTo(300 + 0.5, 450 + 0.5);
         this.ctx.stroke();
     }
-    renderCircle(points: point) {
+    renderCircle(points: point): void {
         this.ctx.beginPath();
         this.ctx.fillStyle = this.line;
         this.ctx.arc(points.x, points.y, 1, 0, Math.PI * 2);
