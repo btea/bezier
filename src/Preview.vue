@@ -46,7 +46,6 @@ export default defineComponent({
         const ay = ref(null);
         const bx = ref(null);
         const by = ref(null);
-        let initTime = 1;
 
         const red = new CreateCanvas({
             width: 60,
@@ -91,7 +90,7 @@ export default defineComponent({
         function curveFn(name: string) {
             if (blue.el) {
                 Object.assign(blue.el, {
-                    style: `transition-timing-function: ${name}; transition-duration: ${initTime}s;background: ${blue.background}`
+                    style: `transition-timing-function: ${name}; transition-duration: ${params.initTime}s;background: ${blue.background}`
                 });
             }
         }
@@ -134,7 +133,7 @@ export default defineComponent({
                 _el.appendChild(blue.el as HTMLCanvasElement);
             }
             setElement(barContent, 'style', 'width: 10%');
-            setElement(timeEl, 'innerText', `${initTime} 秒`);
+            setElement(timeEl, 'innerText', `${params.initTime} 秒`);
             timeFunction(red.el, points);
             curveFn('ease');
         });
