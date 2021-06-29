@@ -28,7 +28,7 @@ type library = {
 export default defineComponent({
     setup() {
         let libs = reactive<Array<library>>([]);
-        libs = Array.from('0'.repeat(5), el => {
+        libs = Array.from('0'.repeat(5), () => {
             let points = new Array(4);
             points[0] = { x: 10, y: 90 };
             points[3] = { x: 90, y: 10 };
@@ -72,6 +72,7 @@ export default defineComponent({
             const _el = libs[i];
             addActive(_el);
             activeFun.value = lib.name as string;
+            curveFn(activeFun.value);
             activeNum = i;
             params.activeLib = lib.name as string;
         };
@@ -88,7 +89,18 @@ export default defineComponent({
             el.ctx.clearRect(0, 0, el.width, el.height);
             el.color = el.line = '#fff';
             el.renderLine(ins.points);
+
+            params.blueArea.ctx.clearRect(0, 0, params.blueArea.width, params.blueArea.height);
+            params.blueArea.renderLine(ins.points.map(p => ({ x: p.x / (10 / 6), y: p.y / (10 / 6) })));
         };
+
+        function curveFn(name: string) {
+            if (params.blueArea.el) {
+                Object.assign(params.blueArea.el, {
+                    style: `transition-timing-function: ${name}; transition-duration: ${params.initTime}s;background: ${params.blueArea.background}`
+                });
+            }
+        }
 
         onMounted(() => {
             const els = document.querySelectorAll('.library-item');

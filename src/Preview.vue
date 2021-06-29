@@ -66,6 +66,7 @@ export default defineComponent({
             line: '#fff',
             background: 'rgb(0, 170, 187)'
         });
+        params.blueArea = blue;
         if (blue.el) {
             blue.el.className = 'show';
             blue.renderLine(bluePoints.map((p: p) => ({ x: p.x / (10 / 6), y: p.y / (10 / 6) })));
