@@ -13,6 +13,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, reactive, ref } from 'vue';
 import CreateCanvas from './utils/createCanvas';
+import params from './utils/params';
 type library = {
     points: Array<{ x: number; y: number }>;
     options: {
@@ -72,6 +73,7 @@ export default defineComponent({
             addActive(_el);
             activeFun.value = lib.name as string;
             activeNum = i;
+            params.activeLib = lib.name as string;
         };
         // 右侧取消当前选中活跃样式
         const removeActive = (ins: library) => {

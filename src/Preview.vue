@@ -14,7 +14,7 @@
             <button class="start-play" ref="play" @click="startPlay">开始</button>
             <div class="time">
                 <span class="name">过渡时间</span>
-                <span class="bar" ref="bar">
+                <span class="bar" ref="bar" @click="setTime">
                     <span class="bar-content" ref="barContent"> </span>
                 </span>
                 <span class="desc-time" ref="timeEl"></span>
@@ -88,14 +88,6 @@ export default defineComponent({
             setElement(bx, 'innerText', c);
             setElement(by, 'innerText', d);
         }
-        function timeFunction(el: HTMLElement | undefined, points: Array<p>, c = 'red') {
-            let bezier = bezierFun(points[1], points[2]);
-            if (el) {
-                Object.assign(el, {
-                    style: `transition-timing-function: cubic-bezier(${bezier}); transition-duration: ${initTime}s;background: ${c}`
-                });
-            }
-        }
         function curveFn(name: string) {
             if (blue.el) {
                 Object.assign(blue.el, {
@@ -110,6 +102,29 @@ export default defineComponent({
             if (blue.el) {
                 blue.el.classList.toggle('move');
             }
+        };
+        function timeFunction(el: HTMLElement | undefined, points: Array<p>, c = 'red') {
+            let bezier = bezierFun(points[1], points[2]);
+            if (el) {
+                Object.assign(el, {
+                    style: `transition-timing-function: cubic-bezier(${bezier}); transition-duration: ${params.initTime}s;background: ${c}`
+                });
+            }
+        }
+        const setTime = (e: MouseEvent) => {
+            const x = e.offsetX as number;
+            let v: string | number = x / 150;
+            v = v.toFixed(3);
+            v = 100 * Number(v);
+            setElement(barContent, 'style', `width: ${v}%`);
+            let initTime = (Math.floor(v) / 100) * 10 + '';
+            if (/\./.test(initTime)) {
+                initTime = Number(initTime).toFixed(1);
+            }
+            params.initTime = Number(initTime);
+            setElement(timeEl, 'innerText', `${initTime} 秒`);
+            timeFunction(red.el, points);
+            curveFn(params.activeLib);
         };
         onMounted(() => {
             const el = unref(operator);
@@ -133,7 +148,8 @@ export default defineComponent({
             ay,
             bx,
             by,
-            startPlay
+            startPlay,
+            setTime
         };
     }
 });
