@@ -21,6 +21,17 @@ type p = {
     x: number;
     y: number;
 };
+type point = {
+    left: number;
+    top: number;
+    x: number;
+    y: number;
+};
+type init = {
+    one: point;
+    two: point;
+};
+type points = Array<{ x: number; y: number }>;
 export default defineComponent({
     components: {
         Preview,
@@ -48,8 +59,8 @@ export default defineComponent({
         };
         let isCanMove = false,
             activeEl: HTMLElement;
-        const init = { one: { left: 50, top: 350, x: 80, y: 350 }, two: { left: 250, top: 250, x: 280, y: 250 } };
-        const points = [
+        const init: init = { one: { left: 50, top: 350, x: 80, y: 350 }, two: { left: 250, top: 250, x: 280, y: 250 } };
+        const points: points = [
             { x: 0, y: 450 },
             { x: 50, y: 350 },
             { x: 250, y: 250 },
@@ -115,7 +126,6 @@ export default defineComponent({
                 titleIconSet(cubic);
                 timeFunction(red.el, points);
                 red.ctx.clearRect(0, 0, red.width, red.height);
-                console.log(points);
                 red.renderLine(points.map(p => ({ x: p.x / 6 + 5, y: (p.y - 150) / 6 + 5 })));
             }
         };
