@@ -23,7 +23,7 @@ export function bezierFun(one: p, two: p): string {
 
 export function titleIconSet(title: string): void {
     title = `cubic-bezier(${title})`;
-    let red = params.redArea;
+    const red = params.redArea;
     let icon = '';
     if (red.el) {
         icon = red.el.toDataURL('image/png');
@@ -53,7 +53,7 @@ export function titleIconSet(title: string): void {
     };
 }
 
-export function setElement(val: ToRefs, attr: string, v: string | number) {
+export function setElement(val: ToRefs, attr: string, v: string | number): void {
     const _val = unref(val);
     if (_val) {
         const el = _val as HTMLElement;
