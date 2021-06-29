@@ -26,6 +26,7 @@
 import { defineComponent, onMounted, ref, unref } from 'vue';
 import CreateCanvas from './utils/createCanvas';
 import numConvert, { setElement } from './utils/fun';
+import params from './utils/params';
 type p = {
     x: number;
     y: number;
@@ -54,6 +55,7 @@ export default defineComponent({
             line: '#fff',
             background: 'red'
         });
+        params.redArea = red;
         if (red.el) {
             red.el.className = 'show';
             red.renderLine(points.map((p: p) => ({ x: p.x / 6 + 5, y: (p.y - 150) / 6 + 5 })));
@@ -88,7 +90,6 @@ export default defineComponent({
         }
         function timeFunction(el: HTMLElement | undefined, points: Array<p>, c = 'red') {
             let bezier = bezierFun(points[1], points[2]);
-            console.log(el);
             if (el) {
                 Object.assign(el, {
                     style: `transition-timing-function: cubic-bezier(${bezier}); transition-duration: ${initTime}s;background: ${c}`

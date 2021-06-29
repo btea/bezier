@@ -11,11 +11,16 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
 import CreateCanvas from './utils/createCanvas';
 import { bezierFun, titleIconSet } from './utils/fun';
 import Preview from './Preview.vue';
 import Library from './Library.vue';
+import params from './utils/params';
+type p = {
+    x: number;
+    y: number;
+};
 export default defineComponent({
     components: {
         Preview,
@@ -56,6 +61,15 @@ export default defineComponent({
                 activeEl = e.target as unknown as HTMLElement;
             });
         };
+        function timeFunction(el: HTMLElement | undefined, points: Array<p>, c = 'red') {
+            let bezier = bezierFun(points[1], points[2]);
+            if (el) {
+                Object.assign(el, {
+                    style: `transition-timing-function: cubic-bezier(${bezier}); transition-duration: ${params.initTime}s;background: ${c}`
+                });
+            }
+        }
+        const red = params.redArea;
         const startMove = (e: MouseEvent) => {
             if (isCanMove) {
                 let x, y, a, b, left, top, vx, vy;
@@ -99,9 +113,10 @@ export default defineComponent({
                 });
                 let cubic = bezierFun(points[1], points[2]);
                 titleIconSet(cubic);
-                // timeFunction(red.el, points);
-                // red.ctx.clearRect(0, 0, red.width, red.height);
-                // red.renderLine(points.map(p => ({ x: p.x / 6 + 5, y: (p.y - 150) / 6 + 5 })));
+                timeFunction(red.el, points);
+                red.ctx.clearRect(0, 0, red.width, red.height);
+                console.log(points);
+                red.renderLine(points.map(p => ({ x: p.x / 6 + 5, y: (p.y - 150) / 6 + 5 })));
             }
         };
         const endMove = () => {
@@ -133,6 +148,12 @@ export default defineComponent({
                 pointMove(el, { x: 250, y: 250 });
                 moveHandler(el);
             }
+            document.addEventListener('mousemove', startMove);
+            document.addEventListener('mouseup', endMove);
+        });
+        onUnmounted(() => {
+            document.removeEventListener('mousemove', startMove);
+            document.removeEventListener('mouseup', endMove);
         });
 
         return {

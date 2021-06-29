@@ -1,4 +1,5 @@
 import { ToRefs, unref } from 'vue';
+import params from './params';
 
 export default function numConvert(n: number): number | string {
     if (!Number(n)) return 0;
@@ -22,8 +23,11 @@ export function bezierFun(one: p, two: p): string {
 
 export function titleIconSet(title: string): void {
     title = `cubic-bezier(${title})`;
-    // let icon = red.el.toDataURL('image/png');
-    const icon = '';
+    let red = params.redArea;
+    let icon = '';
+    if (red.el) {
+        icon = red.el.toDataURL('image/png');
+    }
     const img = document.createElement('img');
     img.src = icon;
     const titleEl = document.getElementsByTagName('title')[0];
