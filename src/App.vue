@@ -6,14 +6,14 @@
             <span class="start point"></span>
             <span class="end point"></span>
         </div>
-        <Preview />
-        <Library />
+        <Preview :points="propPoints" :blue="bluePoints" />
+        <Library :points="propPoints" />
     </div>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import CreateCanvas from './utils/createCanvas';
-import { bezierFun } from './utils/fun';
+import { bezierFun, titleIconSet } from './utils/fun';
 import Preview from './Preview.vue';
 import Library from './Library.vue';
 export default defineComponent({
@@ -98,7 +98,7 @@ export default defineComponent({
                     style: `left: ${vx}px; top: ${vy}px`
                 });
                 let cubic = bezierFun(points[1], points[2]);
-                // titleIconSet(cubic);
+                titleIconSet(cubic);
                 // timeFunction(red.el, points);
                 // red.ctx.clearRect(0, 0, red.width, red.height);
                 // red.renderLine(points.map(p => ({ x: p.x / 6 + 5, y: (p.y - 150) / 6 + 5 })));
@@ -107,10 +107,17 @@ export default defineComponent({
         const endMove = () => {
             isCanMove = false;
         };
+        const propPoints: Array<{ x: number; y: number }> = points;
+        let bluePoints: Array<{ x: number; y: number }> = [
+            { x: 10, y: 90 },
+            { x: 25, y: 85 },
+            { x: 25, y: 10 },
+            { x: 90, y: 10 }
+        ];
 
         const box = ref(null);
-        const one = ref(HTMLElement);
-        const two = ref(HTMLElement);
+        const one = ref(null);
+        const two = ref(null);
         onMounted(() => {
             if (box.value) {
                 const el = box.value as unknown as HTMLElement;
@@ -131,7 +138,9 @@ export default defineComponent({
         return {
             box,
             one,
-            two
+            two,
+            propPoints,
+            bluePoints
         };
     }
 });
