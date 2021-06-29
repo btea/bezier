@@ -11,7 +11,7 @@
         </code>
         <div class="operator" ref="operator">
             <h2>预览 & 比较</h2>
-            <button class="start-play" ref="play">开始</button>
+            <button class="start-play" ref="play" @click="startPlay">开始</button>
             <div class="time">
                 <span class="name">过渡时间</span>
                 <span class="bar" ref="bar">
@@ -102,6 +102,14 @@ export default defineComponent({
                 });
             }
         }
+        const startPlay = () => {
+            if (red.el) {
+                red.el.classList.toggle('move');
+            }
+            if (blue.el) {
+                blue.el.classList.toggle('move');
+            }
+        };
         onMounted(() => {
             const el = unref(operator);
             if (el) {
@@ -110,17 +118,7 @@ export default defineComponent({
                 _el.appendChild(blue.el as HTMLCanvasElement);
             }
             setElement(barContent, 'style', 'width: 10%');
-            // if (barContent.value) {
-            //     const el = barContent.value as unknown as HTMLElement;
-            //     Object.assign(el, {
-            //         style: `width: 10%`
-            //     });
-            // }
             setElement(timeEl, 'innerText', `${initTime} 秒`);
-            // if (timeEl.value) {
-            //     const el = timeEl.value as unknown as HTMLElement;
-            //     el.innerText = `${initTime} 秒`;
-            // }
             timeFunction(red.el, points);
             curveFn('ease');
         });
@@ -133,7 +131,8 @@ export default defineComponent({
             ax,
             ay,
             bx,
-            by
+            by,
+            startPlay
         };
     }
 });
