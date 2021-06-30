@@ -13,12 +13,27 @@ type p = {
     x: number;
     y: number;
 };
+type val = string | number;
 export function bezierFun(one: p, two: p): string {
     const a = numConvert(one.x / 300);
     const b = numConvert((450 - one.y) / 300);
     const c = numConvert(two.x / 300);
     const d = numConvert((450 - two.y) / 300);
+    codeValue(a, b, c, d);
     return `${a}, ${b}, ${c}, ${d}`;
+}
+function findEle(sel: string) {
+    return document.querySelector(sel);
+}
+function codeValue(a: val, b: val, c: val, d: val) {
+    const ax = findEle('#p1x') as HTMLElement;
+    const ay = findEle('#p1y') as HTMLElement;
+    const bx = findEle('#p2x') as HTMLElement;
+    const by = findEle('#p2y') as HTMLElement;
+    setElement(ax, 'innerText', a);
+    setElement(ay, 'innerText', b);
+    setElement(bx, 'innerText', c);
+    setElement(by, 'innerText', d);
 }
 
 export function titleIconSet(title: string): void {
