@@ -81,7 +81,7 @@ export function setElement(val: ToRefs, attr: string, v: string | number): void 
          * 注：enumerable没有设置值为true的时候，默认为false，此时，obj[attr]能获取到对应的属性值，
          * 但是Object.assign时，此时obj相当于{}, JSON.stringify(obj) => "{}"
          * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-         * Objece.assign() 方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象
+         * Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象
          */
         Object.assign(el, obj);
     }
