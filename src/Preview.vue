@@ -32,20 +32,21 @@ type p = {
     y: number;
 };
 type val = string | number;
+type El = HTMLElement | null
 export default defineComponent({
     props: ['points', 'blue'],
     setup(props) {
         const points = props.points;
         const bluePoints = props.blue;
-        const operator = ref(null);
-        const play = ref(null);
-        const bar = ref(null);
-        const barContent = ref(null);
-        const timeEl = ref(null);
-        const ax = ref(null);
-        const ay = ref(null);
-        const bx = ref(null);
-        const by = ref(null);
+        const operator = ref<El>(null);
+        const play = ref<El>(null);
+        const bar = ref<El>(null);
+        const barContent = ref<El>(null);
+        const timeEl = ref<El>(null);
+        const ax = ref<El>(null);
+        const ay = ref<El>(null);
+        const bx = ref<El>(null);
+        const by = ref<El>(null);
 
         const red = new CreateCanvas({
             width: 60,
@@ -83,10 +84,10 @@ export default defineComponent({
         }
 
         function codeValue(a: val, b: val, c: val, d: val) {
-            setElement(ax, 'innerText', a);
-            setElement(ay, 'innerText', b);
-            setElement(bx, 'innerText', c);
-            setElement(by, 'innerText', d);
+            setElement(ax.value!, 'innerText', a);
+            setElement(ay.value!, 'innerText', b);
+            setElement(bx.value!, 'innerText', c);
+            setElement(by.value!, 'innerText', d);
         }
         function curveFn(name: string) {
             if (blue.el) {
@@ -116,13 +117,13 @@ export default defineComponent({
             let v: string | number = x / 150;
             v = v.toFixed(3);
             v = 100 * Number(v);
-            setElement(barContent, 'style', `width: ${v}%`);
+            setElement(barContent.value!, 'style', `width: ${v}%`);
             let initTime = (Math.floor(v) / 100) * 10 + '';
             if (/\./.test(initTime)) {
                 initTime = Number(initTime).toFixed(1);
             }
             params.initTime = Number(initTime);
-            setElement(timeEl, 'innerText', `${initTime} 秒`);
+            setElement(timeEl.value!, 'innerText', `${initTime} 秒`);
             timeFunction(red.el, points);
             curveFn(params.activeLib);
         };
@@ -133,8 +134,8 @@ export default defineComponent({
                 _el.appendChild(red.el as HTMLCanvasElement);
                 _el.appendChild(blue.el as HTMLCanvasElement);
             }
-            setElement(barContent, 'style', 'width: 10%');
-            setElement(timeEl, 'innerText', `${params.initTime} 秒`);
+            setElement(barContent.value!, 'style', 'width: 10%');
+            setElement(timeEl.value!, 'innerText', `${params.initTime} 秒`);
             timeFunction(red.el, points);
             curveFn('ease');
         });

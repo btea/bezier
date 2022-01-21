@@ -1,4 +1,4 @@
-import { ToRefs, unref } from 'vue';
+import { Ref, unref } from 'vue';
 import params from './params';
 
 export default function numConvert(n: number): number | string {
@@ -68,7 +68,7 @@ export function titleIconSet(title: string): void {
     };
 }
 
-export function setElement(val: ToRefs, attr: string, v: string | number): void {
+export function setElement(val: Ref<HTMLElement> | HTMLElement, attr: string, v: string | number): void {
     const _val = unref(val);
     if (_val) {
         const el = _val as HTMLElement;
